@@ -20,7 +20,7 @@ export default function Home() {
 
         <p className="text-center">Run your agency, in one place</p>
         <div className="bg-gradient-to-r from-primary to-secondary-foreground text-transparent bg-clip-text relative">
-          <h1 className="text-7xl font-bold text-center md:text-[300px]">SiteFlow</h1>
+          <h1 className="text-7xl font-bold text-center md:text-[200px]">SiteFlow</h1>
         </div>
         <div className="flex justify-center items-center relative md:mt-[-70px]">
           <Image
