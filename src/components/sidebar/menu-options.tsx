@@ -84,13 +84,16 @@ const MenuOptions = ({
                 className="w-full my-4 flex items-center justify-between py-8"
                 variant={"ghost"}
               >
-                <div className="flex items-center text-left gap-2">
+                <div className="flex flex-2 w-[90%] items-center text-left gap-2">
                   <Compass />
-                  <div className="flex flex-col">
-                    {details.name} <span className="text-muted-foreground">{details.address}</span>{" "}
+                  <div className="flex flex-col w-[90%] overflow-x-hidden  text-ellipsis">
+                    {details.name}{" "}
+                    <span className="text-muted-foreground overflow-x-hidden text-ellipsis">
+                      {details.address}
+                    </span>{" "}
                   </div>
                 </div>
-                <div>
+                <div className="flex-1">
                   <ChevronsUpDown size={16} className="text-muted-foreground" />
                 </div>
               </Button>
