@@ -5,6 +5,13 @@ import { db } from "./db";
 import { redirect } from "next/navigation";
 import { Agency, Plan, User } from "@prisma/client";
 
+//==============================================================================
+//==============================================================================
+//======================GET USER DETAIL ========================================
+//=================FROM DATABASE USING AUTH DETAILS=============================
+//==============================================================================
+//==============================================================================
+
 export const getAuthUserDetails = async () => {
   const user = await currentUser();
   if (!user) {
@@ -266,6 +273,7 @@ export const upsertAgency = async (agency: Agency, price?: Plan) => {
         },
       },
     });
+
     return agencyDetails;
   } catch (error) {
     console.log({ error });

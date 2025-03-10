@@ -62,7 +62,6 @@ const FormSchema = z.object({
 const AgencyDetails = ({ data }: Props) => {
   const router = useRouter();
   const [deletingAgency, setDeletingAgency] = useState(false);
-  console.log({ data });
 
   const form = useForm<z.infer<typeof FormSchema>>({
     mode: "onChange",
@@ -123,7 +122,7 @@ const AgencyDetails = ({ data }: Props) => {
       if (!data?.id) {
         await upsertAgency({
           id: data?.id ? data.id : uuidv4(),
-          //   customerId: data?.customerId || customerId || "",
+          customerId: data?.customerId || customerId || "",
           address: values.address,
           agencyLogo: values.agencyLogo,
           city: values.city,

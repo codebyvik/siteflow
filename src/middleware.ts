@@ -1,22 +1,27 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { clerkMiddleware, createRouteMatcher, currentUser } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
 const isPublicRoute = createRouteMatcher([
-  "/site(.*)",
-  "/api/uploadthing(.*)",
-  "/agency/sign-in(.*)",
-  "/agency/sign-up(.*)",
+  "/site",
+  "/api/uploadthing",
+  "/agency/sign-in",
+  "/agency/sign-up",
 ]);
 export default clerkMiddleware(async (auth, request) => {
+  // const { userId } = await auth();
   // rewrite for domains
   const url = request.nextUrl;
-
   const searchParams = url.searchParams.toString();
   const hostname = request.headers;
 
   const pathWithSearchParams = `${url.pathname}${
     searchParams.length > 0 ? `?${searchParams}` : ""
   }`;
+
+  // Allow public routes without authentication
+  if (isPublicRoute(request)) {
+    return NextResponse.next();
+  }
 
   // if subdomain exists
   const customSubDomain = hostname
@@ -25,7 +30,7 @@ export default clerkMiddleware(async (auth, request) => {
     .filter(Boolean)[0];
 
   if (customSubDomain) {
-    return NextResponse.rewrite(new URL(`${customSubDomain}${pathWithSearchParams}`, request.url));
+    return NextResponse.rewrite(new URL(`/${customSubDomain}${pathWithSearchParams}`, request.url));
   }
 
   if (url.pathname === "/sign-in" || url.pathname === "/sign-up") {
@@ -42,8 +47,10 @@ export default clerkMiddleware(async (auth, request) => {
   if (url.pathname.startsWith("/agency") || url.pathname.startsWith("/subaccount")) {
     return NextResponse.rewrite(new URL(`${pathWithSearchParams}`, request.url));
   }
-  if (!isPublicRoute(request)) {
-    await auth.protect();
+
+  // If user is not authenticated, redirect to sign-in
+  if (!isPublicRoute) {
+    auth.protect();
   }
 });
 
