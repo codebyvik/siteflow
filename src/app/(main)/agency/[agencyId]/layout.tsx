@@ -14,26 +14,28 @@ type Props = {
 };
 
 const layout = async ({ children, params }: Props) => {
-  const agencyId = await verifyAndAcceptInvitation();
+  const AgencyId = await verifyAndAcceptInvitation();
   const user = await currentUser();
+
+  const { agencyId } = await params;
 
   if (!user) {
     return redirect("/");
   }
 
-  if (!agencyId) return redirect("/agency");
+  if (!AgencyId) return redirect("/agency");
 
   if (user.privateMetadata.role !== "AGENCY_OWNER" && user.privateMetadata.role !== "AGENCY_ADMIN")
     return <Unauthorized />;
 
   let allNoti: any = [];
-  const notifications = await getNotificationAndUser(agencyId);
+  const notifications = await getNotificationAndUser(AgencyId);
 
   if (notifications) allNoti = notifications;
 
   return (
     <div className="h-screen overflow-hidden">
-      <Sidebar id={params.agencyId} type="agency" />
+      <Sidebar id={agencyId} type="agency" />
 
       <div className="md:pl-[300px]">
         <InfoBar notifications={allNoti} role={allNoti?.user?.role} />

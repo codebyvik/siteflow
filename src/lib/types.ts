@@ -1,4 +1,6 @@
-import { Notification, Role } from "@prisma/client";
+import { Notification, Prisma, Role } from "@prisma/client";
+import { getUserPermissions } from "./queries/user";
+import { getAuthUserDetails } from "./queries";
 
 export type NotificationWithUser =
   | (Notification & {
@@ -14,3 +16,9 @@ export type NotificationWithUser =
       };
     })
   | undefined;
+
+export type UserWithPermissionsAndSubAccounts = Prisma.PromiseReturnType<typeof getUserPermissions>;
+
+export type AuthUserWithAgencySigebarOptionsSubAccounts = Prisma.PromiseReturnType<
+  typeof getAuthUserDetails
+>;
