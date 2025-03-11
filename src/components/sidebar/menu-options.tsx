@@ -80,9 +80,9 @@ const MenuOptions = ({
           </AspectRatio>
           <Popover>
             <PopoverTrigger asChild>
-              <Button
-                className="w-full my-4 flex items-center justify-between py-8"
-                variant={"ghost"}
+              <div
+                className="h-10 sm:h-9 lg:h-11 gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 w-full my-4 flex items-center justify-between py-8 hover:bg-accent hover:text-accent-foreground cursor-pointer"
+                // variant={"ghost"}
               >
                 <div className="flex flex-2 w-[90%] items-center text-left gap-2">
                   <Compass />
@@ -96,7 +96,7 @@ const MenuOptions = ({
                 <div className="flex-1">
                   <ChevronsUpDown size={16} className="text-muted-foreground" />
                 </div>
-              </Button>
+              </div>
             </PopoverTrigger>
             <PopoverContent className="w-80 h-80 mt-4 z-[200]">
               <Command className="rounded-lg">
@@ -124,7 +124,7 @@ const MenuOptions = ({
                                   className="rounded-md object-contain"
                                 />
                               </div>
-                              <div className="flex flex-col flex-1">
+                              <div className="flex flex-col flex-1 text-black dark:text-white">
                                 {user?.Agency?.name}
                                 <span className="text-muted-foreground">
                                   {user?.Agency?.address}

@@ -1,10 +1,11 @@
+"use client";
 import { FileIcon, X } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { Button } from "../ui/button";
 import { UploadDropzone } from "@uploadthing/react";
 type Props = {
-  apiEndpoint: "agencyLogo" | "avatar" | "subaccountLogo";
+  apiEndpoint: "agencyLogo" | "avatar" | "subAccountLogo";
   onChange: (url?: string) => void;
   value?: string;
 };
