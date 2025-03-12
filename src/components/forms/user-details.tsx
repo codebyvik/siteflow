@@ -143,6 +143,8 @@ const UserDetails = ({ id, type, userData, subAccounts }: Props) => {
     }
   };
 
+  console.log({ subAccountPermissions, userData });
+
   const onChangePermission = async (
     subAccountId: string,
     val: boolean,
