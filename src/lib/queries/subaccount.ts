@@ -3,6 +3,7 @@
 import { SubAccount } from "@prisma/client";
 import { db } from "../db";
 import { v4 as uuidv4 } from "uuid";
+import { CreateMediaType } from "../types";
 
 export const upsertSubAccount = async (subAccount: SubAccount) => {
   if (!subAccount.companyEmail) return null;
@@ -108,6 +109,37 @@ export const deleteSubAccount = async (subaccountId: string) => {
   const response = await db.subAccount.delete({
     where: {
       id: subaccountId,
+    },
+  });
+
+  return response;
+};
+
+export const getMedia = async (subAccountId: string) => {
+  const mediaFiles = await db.subAccount.findUnique({
+    where: { id: subAccountId },
+    include: { media: true },
+  });
+
+  return mediaFiles;
+};
+
+export const createMedia = async (subaccountId: string, mediaFile: CreateMediaType) => {
+  const response = await db.media.create({
+    data: {
+      link: mediaFile.link,
+      name: mediaFile?.name,
+      subAccountId: subaccountId,
+    },
+  });
+
+  return response;
+};
+
+export const deleteMedia = async (id: string) => {
+  const response = await db.media.delete({
+    where: {
+      id,
     },
   });
 
