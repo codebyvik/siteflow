@@ -106,8 +106,6 @@ const UserDetails = ({ id, type, userData, subAccounts }: Props) => {
     }
   }, [data, userData]);
 
-  console.log({ role: authUserdata?.role, authUserdata });
-
   //form handling
   const onSubmit = async (values: z.infer<typeof UserDataSchema>) => {
     if (!id) return;
@@ -142,8 +140,6 @@ const UserDetails = ({ id, type, userData, subAccounts }: Props) => {
       console.log("Error could not submit");
     }
   };
-
-  console.log({ subAccountPermissions, userData });
 
   const onChangePermission = async (
     subAccountId: string,
@@ -285,11 +281,19 @@ const UserDetails = ({ id, type, userData, subAccounts }: Props) => {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="AGENCY_ADMIN">Agency Admin</SelectItem>
                       {(data?.user?.role === "AGENCY_OWNER" ||
                         userData?.role === "AGENCY_OWNER") && (
                         <SelectItem value="AGENCY_OWNER">Agency Owner</SelectItem>
                       )}
+
+                      <SelectItem
+                        disabled={
+                          data?.user?.role != "AGENCY_OWNER" || userData?.role != "AGENCY_OWNER"
+                        }
+                        value="AGENCY_ADMIN"
+                      >
+                        Agency Admin
+                      </SelectItem>
                       <SelectItem value="SUBACCOUNT_USER">Sub Account User</SelectItem>
                       <SelectItem value="SUBACCOUNT_GUEST">Sub Account Guest</SelectItem>
                     </SelectContent>
