@@ -145,3 +145,26 @@ export const deleteMedia = async (id: string) => {
 
   return response;
 };
+
+export const getSubAccountTeamMembers = async (subaccountId: string) => {
+  const subaccountUsersWithAccess = await db.user.findMany({
+    where: {
+      Agency: {
+        subAccounts: {
+          some: {
+            id: subaccountId,
+          },
+        },
+      },
+      role: "SUBACCOUNT_USER",
+      Permissions: {
+        some: {
+          subAccountId: subaccountId,
+          access: true,
+        },
+      },
+    },
+  });
+
+  return subaccountUsersWithAccess;
+};
