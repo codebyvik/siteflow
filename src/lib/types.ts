@@ -21,7 +21,7 @@ import {
 
 export type NotificationWithUser =
   | (Notification & {
-      User: {
+      user: {
         id: string;
         name: string;
         avatarUrl: string;

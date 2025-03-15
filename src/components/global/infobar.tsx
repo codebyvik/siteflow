@@ -11,12 +11,13 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "../ui/sheet";
-import { Bell } from "lucide-react";
+import { Bell, User } from "lucide-react";
 import { Role } from "@prisma/client";
 import { Card } from "../ui/card";
 import { Switch } from "../ui/switch";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { ModeToggle } from "./mode-toggle";
+import notification from "../icons/notification";
 
 type Props = {
   notifications: NotificationWithUser[] | [];
@@ -59,7 +60,7 @@ const InfoBar = ({ notifications, role, className, subaccountId }: Props) => {
                 <Bell size={17} />
               </div>
             </SheetTrigger>
-            <SheetContent className="mt-4 mr-4 pr-4 flex flex-col">
+            <SheetContent className="mt-4 mr-4 pr-4 overflow-scroll">
               <SheetHeader className="text-left">
                 <SheetTitle>Notifications</SheetTitle>
                 <SheetDescription>
@@ -67,7 +68,7 @@ const InfoBar = ({ notifications, role, className, subaccountId }: Props) => {
                     (role === "AGENCY_OWNER" && (
                       <Card className="flex items-center justify-between p-4">
                         Current SubAccount
-                        <Switch onChangeCapture={handleClick} />
+                        <Switch onCheckedChange={handleClick} />
                       </Card>
                     ))}
                 </SheetDescription>
@@ -79,9 +80,9 @@ const InfoBar = ({ notifications, role, className, subaccountId }: Props) => {
                 >
                   <div className="flex gap-2">
                     <Avatar>
-                      <AvatarImage src={notification?.User?.avatarUrl} alt="Profile Picture" />
+                      <AvatarImage src={notification?.user?.avatarUrl} alt="Profile Picture" />
                       <AvatarFallback className="bg-primary">
-                        {notification?.User?.name?.slice(0, 2).toUpperCase()}
+                        {notification?.user?.name?.slice(0, 2).toUpperCase()}
                       </AvatarFallback>
                     </Avatar>
                     <div className="flex flex-col">
