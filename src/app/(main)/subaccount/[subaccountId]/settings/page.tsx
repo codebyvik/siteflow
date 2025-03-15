@@ -22,7 +22,7 @@ const Page = async ({ params }: Props) => {
   if (!userDetails) return;
 
   const subAccount = await db.subAccount.findUnique({
-    where: { id: params.subaccountId },
+    where: { id: subaccountId },
   });
   if (!subAccount) return;
 

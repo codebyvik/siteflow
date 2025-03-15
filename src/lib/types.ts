@@ -1,4 +1,14 @@
-import { Contact, Lane, Notification, Prisma, Role, Tag, Ticket, User } from "@prisma/client";
+import {
+  Contact,
+  Lane,
+  Notification,
+  Prisma,
+  Role,
+  SubAccount,
+  Tag,
+  Ticket,
+  User,
+} from "@prisma/client";
 import { getUserPermissions } from "./queries/user";
 import { getAuthUserDetails } from "./queries";
 import { db } from "./db";
@@ -64,3 +74,7 @@ export type PipelineDetailsWithLanesCardsTagsTickets = Prisma.PromiseReturnType<
 export type TicketWithTags = Prisma.PromiseReturnType<typeof getTicketsWithTags>;
 
 export type TicketDetails = Prisma.PromiseReturnType<typeof _getTicketsWithAllRelations>;
+
+export type SubAccountWithContacts = SubAccount & {
+  contacts: (Contact & { tickets: Ticket[] })[];
+};

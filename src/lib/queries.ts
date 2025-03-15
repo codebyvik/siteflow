@@ -3,7 +3,8 @@
 import { clerkClient, currentUser } from "@clerk/nextjs/server";
 import { db } from "./db";
 import { redirect } from "next/navigation";
-import { Agency, Plan, User } from "@prisma/client";
+import { Agency, Plan, Prisma, User } from "@prisma/client";
+import { v4 } from "uuid";
 
 //==============================================================================
 //==============================================================================
@@ -278,4 +279,13 @@ export const upsertAgency = async (agency: Agency, price?: Plan) => {
   } catch (error) {
     console.log({ error });
   }
+};
+
+export const upsertContact = async (contact: Prisma.ContactUncheckedCreateInput) => {
+  const response = await db.contact.upsert({
+    where: { id: contact.id || v4() },
+    update: contact,
+    create: contact,
+  });
+  return response;
 };
