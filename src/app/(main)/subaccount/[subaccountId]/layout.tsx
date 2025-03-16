@@ -29,6 +29,8 @@ const layout = async ({ children, params }: Props) => {
     (perm) => perm.access && perm.subAccountId === subaccountId
   );
 
+  console.log({ allPermissions });
+
   if (!hasPermission) return <Unauthorized />;
 
   let notifications: any = [];

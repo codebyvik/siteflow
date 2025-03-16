@@ -10,6 +10,7 @@ type Props = {
 const Page = async ({ searchParams }: Props) => {
   const { state, code } = await searchParams;
   const agencyId = await verifyAndAcceptInvitation();
+
   if (!agencyId) return <Unauthorized />;
 
   const user = await getAuthUserDetails();

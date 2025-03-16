@@ -289,3 +289,16 @@ export const upsertContact = async (contact: Prisma.ContactUncheckedCreateInput)
   });
   return response;
 };
+
+export const updateAgencyConnectedId = async (agencyId: string, connectAccountId: string) => {
+  const response = await db.agency.update({
+    where: {
+      id: agencyId,
+    },
+    data: {
+      connectAccountId,
+    },
+  });
+
+  return response;
+};

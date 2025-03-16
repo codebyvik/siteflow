@@ -168,3 +168,19 @@ export const getSubAccountTeamMembers = async (subaccountId: string) => {
 
   return subaccountUsersWithAccess;
 };
+
+export const updateSubAccountConnectedId = async (
+  subAccountId: string,
+  connectAccountId: string
+) => {
+  const response = await db.subAccount.update({
+    where: {
+      id: subAccountId,
+    },
+    data: {
+      connectAccountId,
+    },
+  });
+
+  return response;
+};
