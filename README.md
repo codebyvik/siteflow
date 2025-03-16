@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# **SiteFlow: The Ultimate SaaS Website Builder & Project Management Platform**
 
-## Getting Started
+**Built with Next.js 15, Bun, Stripe Connect, Prisma, MySQL, and Tailwind**
 
-First, run the development server:
+## **🚀 Power-Packed Features**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- 🔹 **Multivendor B2B2B SaaS** – Scale effortlessly with a system designed for agencies and businesses.
+- 🏢 **Agency & Subaccounts** – Manage multiple clients seamlessly under one roof.
+- 🌐 **Unlimited Funnel Hosting** – Create, deploy, and optimize funnels without limits.
+- 🚀 **Full Website & Funnel Builder** – Drag, drop, and launch high-converting pages.
+- 💻 **Role-Based Access Control** – Ensure security with fine-grained permissions.
+- 🔄 **Seamless Stripe Subscription Management** – Handle billing with ease.
+- 🛒 **Sell Add-Ons with Stripe** – Boost revenue with additional product offerings.
+- 🔐 **Stripe Connect Integration** – Enable secure, direct payments for all users.
+- 💳 **Charge Application Fees on Sales & Subscriptions** – Monetize every transaction.
+- 💰 **Custom Dashboards** – Get insights tailored to your business.
+- 📊 **Built-in Media Storage** – Store and manage assets effortlessly.
+- 📈 **Automated Stripe Product Sync** – Keep pricing and products up-to-date.
+- 📌 **Custom Checkouts for Funnels** – Optimize conversions with tailored payment flows.
+- 📢 **Lead Capture from Funnels** – Turn traffic into customers.
+- 🎨 **Kanban Board for Workflow Management** – Stay organized and efficient.
+- 📂 **Robust Project Management Tools** – Keep teams on track.
+- 🔗 **Real-Time Notifications** – Stay updated on critical actions.
+- 📆 **Funnel Performance Metrics & Analytics** – Optimize based on real data.
+- 🧾 **Agency & Subaccount Reporting** – Get a clear view of business performance.
+- 🌙 **Interactive Graphs & Charts** – Make data-driven decisions.
+- ☀️ **Light & Dark Mode** – Work your way with a theme that suits you.
+- 📄 **A Stunning, Fully Functional Landing Page** – Make the best first impression.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**⚡ SiteFlow: Powering the Future of Digital Business!** 🚀
