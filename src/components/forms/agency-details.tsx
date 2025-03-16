@@ -91,7 +91,7 @@ const AgencyDetails = ({ data }: Props) => {
     try {
       let newUserdata;
 
-      let customerId;
+      let custId;
 
       if (!data?.id) {
         const bodyData = {
@@ -115,32 +115,44 @@ const AgencyDetails = ({ data }: Props) => {
             state: values.zipCode,
           },
         };
+        const customerResponse = await fetch("/api/stripe/create-customer", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(bodyData),
+        });
+
+        const customerData: { customerId: string } = await customerResponse.json();
+
+        custId = customerData.customerId;
       }
       newUserdata = await initUser({ role: "AGENCY_OWNER" });
-      // TODO CustID
 
-      if (!data?.id) {
-        await upsertAgency({
-          id: data?.id ? data.id : uuidv4(),
-          customerId: data?.customerId || customerId || "",
-          address: values.address,
-          agencyLogo: values.agencyLogo,
-          city: values.city,
-          companyPhone: values.companyPhone,
-          country: values.country,
-          name: values.name,
-          state: values.state,
-          whiteLabel: values.whiteLabel,
-          zipCode: values.zipCode,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-          companyEmail: values.companyEmail,
-          connectAccountId: "",
-          goal: 5,
-        });
-        toast.success("Created Agency");
-        return router.refresh();
-      }
+      console.log({ data, custId });
+
+      if (!data?.customerId && !custId) return;
+
+      await upsertAgency({
+        id: data?.id ? data.id : uuidv4(),
+        customerId: data?.customerId || custId || "",
+        address: values.address,
+        agencyLogo: values.agencyLogo,
+        city: values.city,
+        companyPhone: values.companyPhone,
+        country: values.country,
+        name: values.name,
+        state: values.state,
+        whiteLabel: values.whiteLabel,
+        zipCode: values.zipCode,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        companyEmail: values.companyEmail,
+        connectAccountId: "",
+        goal: 5,
+      });
+      toast.success("Created Agency");
+      return router.refresh();
     } catch (error) {
       toast.error("Oooopss!!", {
         description: "Could not create your agency",
@@ -155,20 +167,22 @@ const AgencyDetails = ({ data }: Props) => {
 
     try {
       const response = await deleteAgency(data?.id);
-      toast.success("Deleted Agency", {
-        description: "Deleted your agency and all subaccounts",
-      });
 
-      router.refresh();
+      if (response) {
+        toast.success("Deleted Agency", {
+          description: "Deleted your agency and all subaccounts",
+        });
+        router.refresh();
+      }
     } catch (error) {
       console.log({ error });
 
       toast.error("Oooopss!!", {
         description: "Could not delete your agency",
       });
+    } finally {
+      setDeletingAgency(false);
     }
-
-    setDeletingAgency(false);
   };
 
   return (
@@ -410,7 +424,7 @@ const AgencyDetails = ({ data }: Props) => {
               <AlertDialogAction
                 disabled={deletingAgency}
                 className="bg-destructive hover:bg-destructive"
-                // onClick={handleDeleteAgency}
+                onClick={handleDeleteAgency}
               >
                 Delete
               </AlertDialogAction>

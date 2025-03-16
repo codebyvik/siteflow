@@ -18,6 +18,7 @@ import {
   getPipeLineDetails,
   getTicketsWithTags,
 } from "./queries/pipeline";
+import Stripe from "stripe";
 
 export type NotificationWithUser =
   | (Notification & {
@@ -78,3 +79,23 @@ export type TicketDetails = Prisma.PromiseReturnType<typeof _getTicketsWithAllRe
 export type SubAccountWithContacts = SubAccount & {
   contacts: (Contact & { tickets: Ticket[] })[];
 };
+
+export type StripeCustomerType = {
+  email: string;
+  name: string;
+  shipping: ShippingInfo;
+  address: Address;
+};
+export type ShippingInfo = {
+  name: string;
+  address: Address;
+};
+export type Address = {
+  city: string;
+  country: string;
+  line1: string;
+  postal_code: string;
+  state: string;
+};
+
+export type PricesList = Stripe.ApiList<Stripe.Price>;

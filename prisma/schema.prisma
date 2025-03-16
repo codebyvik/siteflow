@@ -34,9 +34,9 @@ enum InvitationStatus {
 
 enum Plan {
   // Product 1: Base Plan
-  price_1OpACCFdfEv15JJwACWCyqW2
+  price_1R3D99SCZcZQMjATQLf1fBeZ
   // Product 2: Unlimited Plan
-  price_1OpACCFdfEv15JJw0k6lm8HC
+  price_1R3D99SCZcZQMjATR4kRzVZk
 }
 
 enum Icon {
@@ -94,7 +94,7 @@ model Agency {
   createdAt        DateTime              @default(now())
   updatedAt        DateTime              @updatedAt
   connectAccountId String?               @default("")
-  customerId       String?               @default("")
+  customerId       String                @default("")
   name             String
   agencyLogo       String                @db.Text
   companyEmail     String                @db.Text
@@ -401,19 +401,18 @@ model Invitation {
 }
 
 model Subscription {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  plan      Plan?
-  price     String?
-  active    Boolean  @default(false)
-
+  id                   String   @id @default(uuid())
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  plan                 Plan?
+  price                String?
+  active               Boolean  @default(false)
   priceId              String
   customerId           String
   currentPeriodEndDate DateTime
-  subscritiptionId     String   @unique
+  subscriptionId       String   @unique
   agencyId             String?  @unique
-  agency               Agency?  @relation(fields: [agencyId], references: [id])
+  Agency               Agency?  @relation(fields: [agencyId], references: [id])
 
   @@index([customerId])
 }
