@@ -163,7 +163,7 @@ const MenuOptions = ({
                           <CommandItem key={subAccount.id}>
                             {defaultOpen ? (
                               <Link
-                                href={`/subaccount/${user?.Agency?.id}`}
+                                href={`/subaccount/${subAccount.id}`}
                                 className="flex gap-4 w-full h-full"
                               >
                                 <div className="relative w-16">
